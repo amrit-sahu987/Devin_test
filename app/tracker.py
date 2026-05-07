@@ -5,10 +5,17 @@ from datetime import datetime
 DATA_FILE = "data/runs.json"
 
 def init_db():
+    os.makedirs("data", exist_ok=True)
     if not os.path.exists(DATA_FILE):
-        os.makedirs("data", exist_ok=True)
         with open(DATA_FILE, "w") as f:
             json.dump([], f)
+    else:
+        try:
+            with open(DATA_FILE, "r") as f:
+                json.load(f)
+        except (json.JSONDecodeError, ValueError):
+            with open(DATA_FILE, "w") as f:
+                json.dump([], f)
 
 def log_session(issue_id, session_id, status):
     init_db()
