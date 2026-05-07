@@ -23,7 +23,10 @@ def process_ci_failure(repo_url: str, failure_details: str):
         print(f"Devin Session Started: {session_id}")
     except Exception as e:
         print(f"Failed to start Devin: {e}")
-        log_session(run_id, "N/A", f"FAILED: {str(e)}")
+        try:
+            log_session(run_id, "N/A", f"FAILED: {str(e)}")
+        except Exception as log_err:
+            print(f"Failed to log session: {log_err}")
 
 @app.post("/webhook")
 async def ci_webhook(request: Request, background_tasks: BackgroundTasks):

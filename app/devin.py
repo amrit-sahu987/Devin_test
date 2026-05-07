@@ -87,13 +87,16 @@ def trigger_devin_remediation(repo_url, issue_title, issue_body):
         "prompt": prompt
     }
 
+    if not DEVIN_API_KEY:
+        raise ValueError("DEVIN_API_KEY is not set. Please add it to your .env file.")
+
     print(f"Sending request to Devin API for: {issue_title}")
     
     response = requests.post(DEVIN_API_URL, headers=headers, json=payload)
     
     # Check for errors BEFORE raise_for_status to log the actual API message
     if response.status_code != 200:
-        print(f"!!! DEVIN API ERROR !!!")
+        print("!!! DEVIN API ERROR !!!")
         print(f"Status Code: {response.status_code}")
         print(f"Response Body: {response.text}")
         # This will help you see if it's a 'Rate Limit', 'Invalid Key', or 'Org Restricted' error
