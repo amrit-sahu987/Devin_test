@@ -1,1 +1,65 @@
-[]
+[
+    {
+        "timestamp": "2026-05-07T12:10:35.130819",
+        "issue_id": "46490ffd",
+        "devin_session_id": "devin-4ec59a929153474bb6c1fd05cac62ca9",
+        "status": "INITIALIZED"
+    },
+    {
+        "timestamp": "2026-05-07T12:19:45.260759",
+        "issue_id": "e88ad58f",
+        "devin_session_id": "devin-ebb64da68b414b92851cab78af61edbe",
+        "status": "INITIALIZED"
+    },
+    {
+        "timestamp": "2026-05-07T12:47:38.457476",
+        "issue_id": "c0bcbc84",
+        "devin_session_id": "devin-caa2d74294b94689960bbf8bced8d7e7",
+        "status": "INITIALIZED"
+    },
+    {
+        "timestamp": "2026-05-07T15:06:34.027056",
+        "issue_id": "132d1812",
+        "devin_session_id": "devin-57d7f35ad9254fe2ae21d4c05def9d00",
+        "status": "INITIALIZED"
+    },
+    {
+        "timestamp": "2026-05-07T15:12:56.812217",
+        "issue_id": "f5b5637c",
+        "devin_session_id": "devin-7638e12cfbba4a62b7911fe947136063",
+        "status": "INITIALIZED"
+    },
+    {
+        "timestamp": "2026-05-07T15:14:39.064164",
+        "issue_id": "4f26c44d",
+        "devin_session_id": "devin-6ea312ef4ff94736b330dbe6f7e2857a",
+        "status": "INITIALIZED"
+    },
+    {
+        "timestamp": "2026-05-08T14:04:36.444285",
+        "run_id": "d45e3d3c",
+        "devin_session_id": "devin-b8d381bd3ead49338265215927d8175f",
+        "status": "IN_PROGRESS",
+        "metadata": {
+            "repository": "https://github.com/amrit-sahu987/superset"
+        }
+    },
+    {
+        "timestamp": "2026-05-08T14:09:34.739528",
+        "run_id": "3fd099d0",
+        "devin_session_id": "devin-fa0c96e439b44bc4921d429891f52ad4",
+        "status": "IN_PROGRESS",
+        "metadata": {
+            "repository": "https://github.com/amrit-sahu987/superset"
+        }
+    },
+    {
+        "timestamp": "2026-05-08T14:25:49.253762",
+        "run_id": "5369e474",
+        "devin_session_id": "devin-c131bc75705f44be8f0431e5545886a3",
+        "status": "IN_PROGRESS",
+        "metadata": {
+            "repository": "https://github.com/amrit-sahu987/superset"
+        }
+    }
+]

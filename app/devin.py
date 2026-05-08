@@ -46,6 +46,7 @@
 import os
 import requests
 from dotenv import load_dotenv
+import time
 
 load_dotenv()
 DEVIN_API_KEY = os.getenv("DEVIN_API_KEY")
@@ -106,3 +107,73 @@ def trigger_devin_remediation(repo_url, issue_title, issue_body):
     # Return the session ID
     session_data = response.json()
     return session_data.get("session_id")
+
+def wait_for_devin_completion(session_id, timeout_minutes=15):
+    """Polls the API until Devin finishes, then extracts the summary."""
+    headers = {
+        "Authorization": f"Bearer {DEVIN_API_KEY}",
+        "x-api-key": DEVIN_API_KEY,
+        "Content-Type": "application/json"
+    }
+    
+    start_time = time.time()
+    
+    # while (time.time() - start_time) < (timeout_minutes * 60):
+    #     # Poll the session endpoint
+    #     response = requests.get(f"{DEVIN_API_URL}/{session_id}", headers=headers)
+    #     if response.status_code != 200:
+    #         time.sleep(30)
+    #         continue
+            
+    #     data = response.json()
+    #     status = data.get("status_enum") or data.get("status")
+        
+    #     if status == "finished":
+    #         # Extract the PR details! This is where the "concise summary" lives.
+    #         pr_info = data.get("pull_request", {})
+    #         pr_url = pr_info.get("url", "No PR URL provided")
+    #         pr_title = pr_info.get("title", "No title provided")
+            
+    #         # Formulate the concise summary
+    #         summary = f"Successfully created PR: {pr_title}. Link: {pr_url}"
+    #         return "COMPLETED", summary
+            
+    #     elif status in ["expired", "failed", "blocked"]:
+    #         return "FAILED", f"Devin stopped prematurely with status: {status}"
+            
+    #     # Wait 30 seconds before polling again to avoid rate limits
+    #     print(f"Devin is still working on {session_id}... checking again in 30s.")
+    #     time.sleep(30)
+    while (time.time() - start_time) < (timeout_minutes * 60):
+        response = requests.get(f"{DEVIN_API_URL}/{session_id}", headers=headers)
+        
+        if response.status_code != 200:
+            print(f"API Error during poll: {response.status_code}")
+            time.sleep(30)
+            continue
+            
+        data = response.json()
+        
+        # Grab every possible status field to be safe
+        status_enum = data.get("status_enum")
+        status_str = data.get("status")
+        state = data.get("state") # Sometimes it's hiding here
+        
+        # The true status is whichever one is actually populated
+        current_status = status_enum or status_str or state
+        
+        print(f"[{int(time.time() - start_time)}s] Devin Status: '{current_status}'")
+        
+        # Expanded success conditions
+        if current_status in ["finished", "completed", "resolved", "success"]:
+            pr_info = data.get("pull_request", {})
+            pr_url = pr_info.get("url", "No PR URL provided")
+            return "COMPLETED", f"PR Created: {pr_url}"
+            
+        # Expanded failure/blocked conditions
+        elif current_status in ["expired", "failed", "error", "stopped", "blocked", "requires_action"]:
+            return "FAILED", f"Devin stopped with status: {current_status}"
+            
+        time.sleep(30)
+        
+    return "TIMEOUT", "Orchestrator stopped waiting after 15 minutes."
