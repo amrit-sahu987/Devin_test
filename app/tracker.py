@@ -22,7 +22,6 @@ def log_session(run_id, session_id, status, **kwargs):
     with open(DATA_FILE, "r") as f:
         runs = json.load(f)
     
-    # Create the base entry
     entry = {
         "timestamp": datetime.utcnow().isoformat(),
         "run_id": run_id,
@@ -30,7 +29,6 @@ def log_session(run_id, session_id, status, **kwargs):
         "status": status,
     }
     
-    # If any extra metadata was passed, attach it under a 'metadata' key
     if kwargs:
         entry["metadata"] = kwargs
     
@@ -40,7 +38,6 @@ def log_session(run_id, session_id, status, **kwargs):
         json.dump(runs, f, indent=4)
     
 def update_session(run_id, status, **kwargs):
-    """Finds an existing run and updates its status and metadata."""
     init_db()
     with open(DATA_FILE, "r") as f:
         runs = json.load(f)
@@ -50,7 +47,6 @@ def update_session(run_id, status, **kwargs):
             run["status"] = status
             run["timestamp_completed"] = datetime.utcnow().isoformat()
             
-            # Merge new metadata (like the Devin summary) with the existing metadata
             if "metadata" not in run:
                 run["metadata"] = {}
             run["metadata"].update(kwargs)

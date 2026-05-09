@@ -61,5 +61,47 @@
         "metadata": {
             "repository": "https://github.com/amrit-sahu987/superset"
         }
+    },
+    {
+        "timestamp": "2026-05-08T15:14:40.604219",
+        "run_id": "432d8453",
+        "devin_session_id": "devin-d092b18e44234e6b8cc3e5f5537be750",
+        "status": "FAILED",
+        "metadata": {
+            "repository": "https://github.com/amrit-sahu987/superset",
+            "error_message": "'NoneType' object has no attribute 'get'"
+        },
+        "timestamp_completed": "2026-05-08T15:14:41.290580"
+    },
+    {
+        "timestamp": "2026-05-08T15:20:52.625819",
+        "run_id": "4918bd95",
+        "devin_session_id": "devin-b6a10950224d4a7eadfb9663a453a3ae",
+        "status": "TIMEOUT",
+        "metadata": {
+            "repository": "https://github.com/amrit-sahu987/superset",
+            "devin_summary": "Orchestrator stopped waiting after 15 minutes."
+        },
+        "timestamp_completed": "2026-05-08T15:36:18.959675"
+    },
+    {
+        "timestamp": "2026-05-09T14:45:17.490771",
+        "run_id": "c654e6e8",
+        "devin_session_id": "devin-e2700bb7847e48528548ecc5fcf5f817",
+        "status": "FAILED",
+        "metadata": {
+            "repository": "https://github.com/amrit-sahu987/superset",
+            "devin_summary": "Devin stopped with status: blocked"
+        },
+        "timestamp_completed": "2026-05-09T14:51:04.103367"
+    },
+    {
+        "timestamp": "2026-05-09T14:51:49.045158",
+        "run_id": "79e026ca",
+        "devin_session_id": "devin-2b1dc26ee935431dac5f74fdaf4db764",
+        "status": "IN_PROGRESS",
+        "metadata": {
+            "repository": "https://github.com/amrit-sahu987/superset"
+        }
     }
 ]
