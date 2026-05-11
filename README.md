@@ -57,8 +57,6 @@ on:
 ### Testing the Pipeline
 To see the autonomous agent in action:
 
-Create a new branch.
-
 Downgrade a dependency in your project (e.g., requests==2.28.1 in requirements.txt) to introduce a known vulnerability.
 
 Commit and push the branch to trigger the CI/CD pipeline.
